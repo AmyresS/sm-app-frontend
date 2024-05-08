@@ -1,0 +1,56 @@
+<template>
+  <div @click="selectedChat = null" id="closeChatButton">
+    <svg
+      shape-rendering="geometricPrecision"
+      text-rendering="geometricPrecision"
+      image-rendering="optimizeQuality"
+      fill-rule="evenodd"
+      clip-rule="evenodd"
+      viewBox="0 0 500 511.61"
+    >
+      <path
+        fill-rule="nonzero"
+        d="m234.04 148.39-15.5 101.27c45.53-4.54 96.06-15.77 138.72-45.89 47.72-33.69 86.31-91.72 98.25-191.8.87-7.43 7.62-12.75 15.06-11.87 5.73.68 10.21 4.85 11.55 10.13 10.87 32.61 16.46 63.43 17.63 92.35 3.27 79.4-26.39 144.21-70.18 193.61-43.36 48.92-100.66 82.64-153.32 100.33-20.18 6.79-39.8 11.27-57.77 13.36l15.44 85.83c1.31 7.33-3.57 14.37-10.91 15.69-4.07.72-8.04-.46-11-2.9L4.91 337.19c-5.76-4.76-6.57-13.32-1.8-19.08l1.54-1.58 207.06-180.39c5.64-4.92 14.22-4.32 19.14 1.32 2.72 3.12 3.75 7.13 3.19 10.93z"
+      />
+    </svg>
+  </div>
+  <div class="messages">
+    <div class="message" id="m_id225465472">
+      <div class="avatar"></div>
+      <div class="username">Test User</div>
+      <div class="text">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+        labore et dolore magna aliqua. Sed arcu non odio euismod lacinia at quis risus sed. Odio eu
+        feugiat pretium nibh. Eu mi bibendum neque egestas congue quisque egestas diam in.
+        Pellentesque habitant morbi tristique senectus et netus et malesuada. Sagittis orci a
+        scelerisque purus semper eget. Enim facilisis gravida neque convallis a cras semper auctor.
+        Est sit amet facilisis magna etiam tempor orci. Fringilla ut morbi tincidunt augue interdum
+        velit euismod in. Blandit volutpat maecenas volutpat blandit aliquam etiam erat velit
+        scelerisque.
+      </div>
+      <div class="time">19:00</div>
+    </div>
+  </div>
+  <div class="type-area">
+    <div class="textarea-box">
+      <textarea
+        name="user-message"
+        id="user-message"
+        placeholder="Your message..."
+        ref="textarea"
+        v-model="input"
+      ></textarea>
+    </div>
+  </div>
+</template>
+
+<style>
+@import '../assets/Chat.css';
+</style>
+
+<script setup>
+import { useTextareaAutosize } from '@vueuse/core'
+
+const selectedChat = defineModel()
+const { textarea, input } = useTextareaAutosize()
+</script>

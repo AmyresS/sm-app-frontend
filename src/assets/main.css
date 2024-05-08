@@ -1,12 +1,5 @@
 @import './base.css';
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  font-weight: normal;
-}
-
 a,
 .green {
   text-decoration: none;
@@ -15,21 +8,70 @@ a,
   padding: 3px;
 }
 
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
+nav {
+  display: flex;
+  justify-content: center;
+  padding: 1em 0;
+  user-select: none;
+
+  & * {
+    margin: 0 2em;
+  }
+
+  a {
+    &:hover {
+      filter: brightness(75%);
+    }
+
+    &:after {
+      content: '';
+      margin: auto;
+      display: block;
+      height: 1px;
+      width: 0%;
+      transition: all 0.3s ease;
+    }
+
+    &.router-link-active:after {
+      width: 100%;
+      background-color: hsla(160, 100%, 37%, 1);
+    }
+  }
+
+  .router-link-active {
+    transform: scale(1.1);
   }
 }
 
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
+.acryllic-bg {
+  z-index: -100;
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  filter: blur(35px);
+  opacity: 20%;
+  background-image: url(gggyrate.svg);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: 50% 0%;
+}
 
-  #app {
+.content {
+  padding: 2em 3em;
+  position: relative;
+
+  .grid {
+    position: absolute;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
+
+    .box {
+      background-color: #30303085;
+      backdrop-filter: blur(100px);
+      border-radius: 1em;
+      padding: 0.7em;
+      overflow: hidden;
+    }
   }
 }
