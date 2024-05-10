@@ -28,20 +28,17 @@
         </div>
 
         <div class="chat-list">
-          <div class="chat" @click="selectedChat = 'p_id1'">
+          <div class="chat chat-group" @click="selectedChat = 'p_id1'">
             <div class="avatar">
               <img src="../assets/images/16.png" alt="" />
             </div>
             <div class="chat-preview">
-              <p>Some chat name</p>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                incididunt ut labore et dolore magna aliqua.
-              </p>
+              <p>Some group name</p>
+              <p>My first test message</p>
             </div>
             <div class="chat-info">
               <p class="time">19:00</p>
-              <p class="message-count unread">12</p>
+              <p class="message-count">1</p>
             </div>
           </div>
 

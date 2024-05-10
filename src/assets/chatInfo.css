@@ -1,0 +1,170 @@
+.chat-information {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.5em 1.5em;
+
+  & hr {
+    margin: 0.7em 0;
+    width: 80%;
+    border: 2px solid #55555544;
+    border-radius: 1em;
+
+    &:nth-child(4) {
+      margin-top: auto;
+    }
+  }
+
+  .top-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1em;
+    /* background-color: #11111144; */
+    padding: 1em 1.2em 0 1.2em;
+
+    .avatar {
+      /* background-color: #00000033; */
+      height: clamp(50px, 15vh, 150px);
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .name {
+      width: 100%;
+      font-size: 1.1em;
+      color: #fff;
+      text-align: center;
+      margin: 0.7em 0 0.3em 0;
+    }
+    .description {
+      width: 100%;
+      text-align: center;
+      font-weight: 600;
+      color: #757575;
+    }
+  }
+
+  .members {
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    padding: 0 1.2em;
+    margin-bottom: 0.7em;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    .member {
+      position: relative;
+      margin: 0.7em 0;
+      display: grid;
+      grid-template-columns: 1fr 10fr;
+      grid-template-rows: auto auto;
+      gap: 0 1em;
+
+      .user-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        aspect-ratio: 1 / 1;
+        background-color: #00000033;
+
+        align-self: center;
+
+        grid-column-start: 1;
+        grid-column-end: 1;
+        grid-row-start: 1;
+        grid-row-end: span 2;
+      }
+
+      .name,
+      .role {
+        text-align: left;
+        font-size: 0.9em;
+      }
+
+      .name {
+        color: #fff;
+      }
+
+      .role {
+        color: #757575;
+      }
+
+      .messageTo {
+        position: absolute;
+        width: 17px;
+        height: 17px;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        background: url('data:image/svg+xml,<svg fill="%23424242" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 490.122 490.122" xml:space="preserve"><g><path d="M30.912,252.922l114.5,39.3c9,3.1,18.7-1.7,21.8-10.7s-1.7-18.7-10.7-21.8l-114.6-39.3c-6.6-2.3-7.5-7.9-7.6-10.3c-0.1-2.3,0.5-8,6.9-10.7l399.1-164.1c6.2-2.6,10.6,0.9,12.2,2.4c1.6,1.6,5,6,2.4,12.2l-164.1,399c-2.7,6.5-8.3,7-10.7,6.9c-2.3-0.1-8-1-10.3-7.6l-43.5-127.1l139.9-164.9c6.1-7.2,5.2-18-2-24.2c-7.2-6.1-18-5.2-24.2,2l-146.2,172.3c-3.9,4.6-5.1,10.9-3.1,16.6l46.6,136.4c6.2,18.1,22.5,30.2,41.7,30.8c0.5,0,1,0,1.4,0c18.5,0,34.9-10.9,42-28.2l164.1-399c7.1-17.3,3.3-36.3-9.9-49.5c-13.2-13.2-32.2-17-49.5-9.9l-399,164.1c-17.5,7.4-28.6,24.5-28,43.6S12.712,246.722,30.912,252.922z"/></g></svg>');
+      }
+    }
+  }
+  .tools {
+    margin-top: auto;
+    display: grid;
+    grid-template-columns: 70px 70px 100px;
+    gap: 0.5em;
+    padding: 0em 3em;
+
+    & div {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 55px;
+      border-radius: 1em;
+      background-color: #11111144;
+      overflow: hidden;
+
+      cursor: pointer;
+      transition: 0.2s;
+
+      & * {
+        transition: 0.2s;
+      }
+
+      & svg {
+        width: 25px;
+        height: 25px;
+        fill: #424242;
+      }
+
+      & p {
+        position: absolute;
+        bottom: -30%;
+        font-weight: 900;
+        font-size: 0.8em;
+        color: #424242;
+      }
+
+      &.chat-leave {
+        & svg {
+          fill: #692d2d;
+        }
+        & p {
+          color: #692d2d;
+        }
+      }
+
+      &:hover {
+        filter: brightness(150%);
+
+        & svg {
+          transform: scale(0.8) translateY(-40%);
+        }
+
+        & p {
+          bottom: 5%;
+        }
+      }
+    }
+  }
+}
