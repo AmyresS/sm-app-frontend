@@ -24,7 +24,8 @@
     align-items: center;
     border-radius: 1em;
     /* background-color: #11111144; */
-    padding: 1em 1.2em 0 1.2em;
+    padding: 0 1.2em 0 1.2em;
+    cursor: pointer;
 
     .avatar {
       /* background-color: #00000033; */
@@ -37,13 +38,33 @@
       font-size: 1.1em;
       color: #fff;
       text-align: center;
-      margin: 0.7em 0 0.3em 0;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 1;
+      line-clamp: 1;
+      overflow: hidden;
+      transition: 0.5s;
     }
     .description {
       width: 100%;
       text-align: center;
       font-weight: 600;
       color: #757575;
+
+      max-height: 0px;
+      overflow: hidden;
+      transition: 0.5s;
+    }
+
+    &:hover {
+      .name {
+        -webkit-line-clamp: unset;
+        line-clamp: unset;
+
+        + .description {
+          max-height: 200px;
+        }
+      }
     }
   }
 
@@ -52,7 +73,7 @@
     overflow-x: hidden;
     overflow-y: scroll;
     padding: 0 1.2em;
-    margin-bottom: 0.7em;
+    margin: 1em 0;
 
     &::-webkit-scrollbar {
       display: none;
@@ -132,9 +153,9 @@
       }
 
       & svg {
-        width: 25px;
-        height: 25px;
-        fill: #424242;
+        width: 28px;
+        height: 28px;
+        stroke: #424242;
       }
 
       & p {
@@ -162,9 +183,20 @@
         }
 
         & p {
-          bottom: 5%;
+          bottom: 10%;
         }
       }
+    }
+
+    .pinned-messages svg {
+      stroke: none;
+      fill: #424242;
+    }
+
+    .chat-leave svg {
+      margin-right: 5px;
+      fill: none !important;
+      stroke: #692d2d !important;
     }
   }
 }
