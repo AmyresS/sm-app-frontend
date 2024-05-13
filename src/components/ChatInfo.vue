@@ -87,7 +87,7 @@
         </svg>
         <p>edit</p>
       </div>
-      <div class="user-invite">
+      <div class="user-invite" @click="openModal(1)">
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="12" cy="12" r="10" stroke-width="1.5" />
           <path
@@ -97,6 +97,70 @@
           />
         </svg>
         <p>invite</p>
+        <Teleport to="#modal-component">
+          <Modal
+            :shown="isModalOpened == 1"
+            @modal-close="closeModal"
+            @submit="inviteUser"
+            name="inviteUser-modal"
+          >
+            <template #header>Invite user</template>
+            <template #content>
+              <div class="test">
+                <p>
+                  (-- here must be a list of people from your chats--) (-- here must be a list of
+                  people from your chats--) (-- here must be a list of people from your chats--)
+                </p>
+                <p>first test</p>
+                <p>test</p>
+              </div>
+              <p>test</p>
+              <p>test</p>
+              <p>test</p>
+              <p>test</p>
+              <p>test</p>
+              <p>test</p>
+              <p>test</p>
+              <p>test</p>
+              <p>test</p>
+              <p>test</p>
+              <p>test</p>
+              <p>test</p>
+              <p>test /////</p>
+              <p>test</p>
+              <p>test</p>
+              <p>test</p>
+              <p>test</p>
+              <p>test</p>
+              <p>test</p>
+              <p>test</p>
+              <p>test</p>
+              <p>test</p>
+              <p>test</p>
+              <p>test</p>
+              <p>test</p>
+              <p>test</p>
+              <p>test</p>
+              <p>test</p>
+              <p>test</p>
+              <p>test</p>
+              <p>test</p>
+              <p>test</p>
+              <p>test</p>
+              <p>test</p>
+              <p>test</p>
+              <p>test</p>
+              <p>test</p>
+              <p>test</p>
+              <p>test</p>
+              <p>test</p>
+              <p>test</p>
+              <p>test</p>
+              <p>test</p>
+              <p>last test</p>
+            </template>
+          </Modal>
+        </Teleport>
       </div>
       <div class="pinned-messages">
         <svg
@@ -113,7 +177,7 @@
         </svg>
         <p>pinned</p>
       </div>
-      <div class="chat-leave">
+      <div class="chat-leave" @click="openModal(3)">
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M9.00195 7C9.01406 4.82497 9.11051 3.64706 9.87889 2.87868C10.7576 2 12.1718 2 15.0002 2L16.0002 2C18.8286 2 20.2429 2 21.1215 2.87868C22.0002 3.75736 22.0002 5.17157 22.0002 8L22.0002 16C22.0002 18.8284 22.0002 20.2426 21.1215 21.1213C20.2429 22 18.8286 22 16.0002 22H15.0002C12.1718 22 10.7576 22 9.87889 21.1213C9.11051 20.3529 9.01406 19.175 9.00195 17"
@@ -128,13 +192,35 @@
           />
         </svg>
         <p>leave</p>
+        <Teleport to="#modal-component">
+          <Modal
+            :shown="isModalOpened == 3"
+            @modal-close="closeModal"
+            @submit="leaveGroup"
+            name="leaveGroup-modal"
+          >
+            <template #header>Confirm</template>
+            <template #content>Are you sure you want to leave (-Group_name-) ?</template>
+          </Modal>
+        </Teleport>
       </div>
-      <div class="user-delete">
+      <div class="user-delete" @click="openModal(2)">
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="12" cy="12" r="10" stroke-width="1.5" />
           <path d="M15 12H9" stroke-width="1.5" stroke-linecap="round" />
         </svg>
         <p>kick</p>
+        <Teleport to="#modal-component">
+          <Modal
+            :shown="isModalOpened == 2"
+            @modal-close="closeModal"
+            @submit="kickUser"
+            name="kickUser-modal"
+          >
+            <template #header>Kick user</template>
+            <template #content>(-- here must be a list of people from current group--) </template>
+          </Modal>
+        </Teleport>
       </div>
       <div class="media">
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -164,5 +250,30 @@
 </style>
 
 <script setup>
+import { ref } from 'vue'
+import Modal from './Modal.vue'
+
 const selectedChat = defineModel()
+const isModalOpened = ref(0)
+const modal_states = ref({})
+
+const openModal = (index) => {
+  isModalOpened.value = index
+}
+
+const closeModal = () => {
+  isModalOpened.value = 0
+}
+
+const inviteUser = () => {
+  console.log('inviteUser')
+}
+
+const kickUser = () => {
+  console.log('kickUser')
+}
+
+const leaveGroup = () => {
+  console.log('leaveGroup')
+}
 </script>

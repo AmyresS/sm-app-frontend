@@ -5,13 +5,14 @@
       <div class="backlight bl-2"></div>
       <div class="backlight bl-3"></div>
       <div class="box messages-box">
+        <div class="background-image"></div>
         <p v-if="selectedChat == null" noChatSelected>Select a chat to start a conversation</p>
         <Chat v-if="selectedChat != null" v-model="selectedChat" />
       </div>
 
       <div class="box tool-box">
         <p>chats</p>
-        <div class="tool chat-new">
+        <div class="tool chat-new" @click="openModal(1)">
           <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2C16.714 2 19.0711 2 20.5355 3.46447C22 4.92893 22 7.28595 22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12Z"
@@ -23,6 +24,20 @@
               stroke-linecap="round"
             />
           </svg>
+          <Teleport to="#modal-component">
+            <Modal
+              :shown="isModalOpened"
+              @modal-close="closeModal"
+              @submit="createChat"
+              name="createChat-modal"
+            >
+              <template #header>Create chat</template>
+              <template #content
+                >(-- here must be a list of people from your division--)
+                <!-- <input type="text" class="test" v-model="testInput" /> -->
+              </template>
+            </Modal>
+          </Teleport>
         </div>
         <p>status</p>
         <div class="tool status">
@@ -318,6 +333,20 @@
 import { ref } from 'vue'
 import Chat from './Chat.vue'
 import ChatInfo from './ChatInfo.vue'
+import Modal from './Modal.vue'
 
 const selectedChat = ref()
+const isModalOpened = ref(false)
+
+const openModal = () => {
+  isModalOpened.value = true
+}
+const closeModal = () => {
+  isModalOpened.value = false
+}
+
+const createChat = () => {
+  console.log('createChat')
+  // chat creation code
+}
 </script>

@@ -15,6 +15,7 @@ import LoginPage from './components/LoginPage.vue'
     </div>
   </header>
 
+  <div id="modal-component"></div>
   <RouterView />
 </template>
 
