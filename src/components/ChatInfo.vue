@@ -106,58 +106,7 @@
           >
             <template #header>Invite user</template>
             <template #content>
-              <div class="test">
-                <p>
-                  (-- here must be a list of people from your chats--) (-- here must be a list of
-                  people from your chats--) (-- here must be a list of people from your chats--)
-                </p>
-                <p>first test</p>
-                <p>test</p>
-              </div>
-              <p>test</p>
-              <p>test</p>
-              <p>test</p>
-              <p>test</p>
-              <p>test</p>
-              <p>test</p>
-              <p>test</p>
-              <p>test</p>
-              <p>test</p>
-              <p>test</p>
-              <p>test</p>
-              <p>test</p>
-              <p>test /////</p>
-              <p>test</p>
-              <p>test</p>
-              <p>test</p>
-              <p>test</p>
-              <p>test</p>
-              <p>test</p>
-              <p>test</p>
-              <p>test</p>
-              <p>test</p>
-              <p>test</p>
-              <p>test</p>
-              <p>test</p>
-              <p>test</p>
-              <p>test</p>
-              <p>test</p>
-              <p>test</p>
-              <p>test</p>
-              <p>test</p>
-              <p>test</p>
-              <p>test</p>
-              <p>test</p>
-              <p>test</p>
-              <p>test</p>
-              <p>test</p>
-              <p>test</p>
-              <p>test</p>
-              <p>test</p>
-              <p>test</p>
-              <p>test</p>
-              <p>test</p>
-              <p>last test</p>
+              <p>(-- here must be a list of people from your chats--)</p>
             </template>
           </Modal>
         </Teleport>
