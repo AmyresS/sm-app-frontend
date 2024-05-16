@@ -1,22 +1,22 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import { useAuthStore } from './stores/auth';
-import { computed, onMounted } from 'vue';
+import { useAuthStore } from './stores/auth'
+import { computed, onMounted } from 'vue'
+import Auth from './components/Auth.vue'
 
-const authStore = useAuthStore();
+const authStore = useAuthStore()
 
 onMounted(() => {
   // temp
-  authStore.login("test@sm-app.org", "test").then(() => {
-    authStore.refreshAccessToken().then(() => {
-    });
+  authStore.login('test@sm-app.org', 'test').then(() => {
+    authStore.refreshAccessToken().then(() => {})
 
-    console.log(authStore.getUser.id);
-  });
-});
+    console.log(authStore.getUser.id)
+  })
+})
 
 const isLoggedIn = computed(() => {
-  return authStore.isLoggedIn;
+  return authStore.isLoggedIn
 })
 </script>
 
@@ -34,7 +34,7 @@ const isLoggedIn = computed(() => {
 
   <div id="modal-component"></div>
   <Auth v-if="!isLoggedIn"></Auth>
-  <RouterView v-if="isLoggedIn"/>
+  <RouterView v-if="isLoggedIn" />
 </template>
 
 <style scoped></style>
