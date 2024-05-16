@@ -1,7 +1,7 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 import { useAuthStore } from './stores/auth';
-import { onMounted } from 'vue';
+import { computed, onMounted } from 'vue';
 
 const authStore = useAuthStore();
 
@@ -9,10 +9,15 @@ onMounted(() => {
   // temp
   authStore.login("test@sm-app.org", "test").then(() => {
     authStore.refreshAccessToken().then(() => {
-      console.log(authStore.getUser());
     });
+
+    console.log(authStore.getUser.id);
   });
 });
+
+const isLoggedIn = computed(() => {
+  return authStore.isLoggedIn;
+})
 </script>
 
 <template>
@@ -28,8 +33,8 @@ onMounted(() => {
   </header>
 
   <div id="modal-component"></div>
-  <Auth v-if="user === false"></Auth>
-  <RouterView v-if="user === true"/>
+  <Auth v-if="!isLoggedIn"></Auth>
+  <RouterView v-if="isLoggedIn"/>
 </template>
 
 <style scoped></style>
