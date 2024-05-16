@@ -1,6 +1,18 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import LoginPage from './components/LoginPage.vue'
+import { useAuthStore } from './stores/auth';
+import { onMounted } from 'vue';
+
+const authStore = useAuthStore();
+
+onMounted(() => {
+  // temp
+  authStore.login("test@sm-app.org", "test").then(() => {
+    authStore.refreshAccessToken().then(() => {
+      console.log(authStore.getUser());
+    });
+  });
+});
 </script>
 
 <template>
