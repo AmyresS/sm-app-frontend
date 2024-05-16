@@ -17,7 +17,7 @@ onMounted(() => {
 
 <template>
   <div class="acryllic-bg"></div>
-  <header>
+  <header v-if="user === true">
     <div class="wrapper">
       <nav>
         <RouterLink to="/">Home</RouterLink>
@@ -28,7 +28,8 @@ onMounted(() => {
   </header>
 
   <div id="modal-component"></div>
-  <RouterView />
+  <Auth v-if="user === false"></Auth>
+  <RouterView v-if="user === true"/>
 </template>
 
 <style scoped></style>
