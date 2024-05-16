@@ -22,7 +22,7 @@ const isLoggedIn = computed(() => {
 
 <template>
   <div class="acryllic-bg"></div>
-  <header v-if="user === true">
+  <header v-if="isLoggedIn">
     <div class="wrapper">
       <nav>
         <RouterLink to="/">Home</RouterLink>
