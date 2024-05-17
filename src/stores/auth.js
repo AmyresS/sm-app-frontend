@@ -1,10 +1,9 @@
 import { defineStore } from "pinia";
-import { API } from "@/api";
+import { API, setAccessToken } from "@/api";
 
 export const useAuthStore = defineStore("auth", {
     state: () => ({
         user: null,
-        accessToken: null
     }),
 
     getters: {
@@ -16,13 +15,13 @@ export const useAuthStore = defineStore("auth", {
         async refreshAccessToken() {
             const res = await API.post("/auth/login/access-token");
             this.user = res.data.user;
-            this.accessToken = res.data.accessToken;
+            setAccessToken(res.data.accessToken);
         },
 
         async login(email, password) {
             const res = await API.post("/auth/login", { email, password });
             this.user = res.data.user;
-            this.accessToken = res.data.accessToken;
+            setAccessToken(res.data.accessToken);
         }
     }
 });
