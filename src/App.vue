@@ -4,19 +4,14 @@ import { useAuthStore } from './stores/auth'
 import { computed, onMounted } from 'vue'
 import Auth from './components/Auth.vue'
 
-const authStore = useAuthStore()
+const auth = useAuthStore()
 
 onMounted(() => {
-  // temp
-  authStore.login('test@sm-app.org', 'test').then(() => {
-    authStore.refreshAccessToken().then(() => {})
-
-    console.log(authStore.getUser.id)
-  })
+  auth.refreshAccessToken().then(() => console.log("refresh"))
 })
 
 const isLoggedIn = computed(() => {
-  return authStore.isLoggedIn
+  return auth.isLoggedIn
 })
 </script>
 

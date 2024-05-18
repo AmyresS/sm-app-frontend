@@ -17,64 +17,15 @@
   <div class="messages">
     <div class="fix-this-freaking-scroll"></div>
 
-    <div class="message own" id="m_id225465472">
+    <div v-for="message in messages" :class="`message ${message.isMyself ? 'own' : ''}`" :key="message.id">
       <img class="avatar" src="../assets/images/photo_2024-05-03_02-58-25.jpg" alt="" />
-      <div class="username">AmyresS</div>
+      <div class="username">{{ message.user?.name }}</div>
       <div class="text">
-        My first test message
-        <div class="time">19:00</div>
+        {{ message.message }}
+        <div class="time">{{ message.createdAt }}</div>
       </div>
     </div>
-    <div class="message" id="m_id225465472">
-      <img class="avatar" src="../assets/images/avatar3.jpg" alt="" />
-      <div class="username">Test User2</div>
-      <div class="text">
-        Hello world!
-        <div class="time">18:31</div>
-      </div>
-    </div>
-    <div class="message" id="m_id225465472">
-      <img class="avatar" src="../assets/images/avatar2.jpg" alt="" />
-      <div class="username">Test User</div>
-      <div class="text">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-        labore et dolore magna aliqua. Sed arcu non odio euismod lacinia at quis risus sed. Odio eu
-        feugiat pretium nibh. Eu mi bibendum neque egestas congue quisque egestas diam in.
-        Pellentesque habitant morbi tristique senectus et netus et malesuada. Sagittis orci a
-        scelerisque purus semper eget. Enim facilisis gravida neque convallis a cras semper auctor.
-        Est sit amet facilisis magna etiam tempor orci. Fringilla ut morbi tincidunt augue interdum
-        velit euismod in. Blandit volutpat maecenas volutpat blandit aliquam etiam erat velit
-        scelerisque.
-        <div class="time">Mon</div>
-      </div>
-    </div>
-    <div class="message own" id="m_id225465472">
-      <img class="avatar" src="../assets/images/photo_2024-05-03_02-58-25.jpg" alt="" />
-      <div class="username">AmyresS</div>
-      <div class="text">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-        labore et dolore magna aliqua. Sed arcu non odio euismod lacinia at quis risus sed. Odio eu
-        feugiat pretium nibh. Eu mi bibendum neque egestas congue quisque egestas diam in.
-        Pellentesque habitant morbi tristique senectus et netus et malesuada. Sagittis orci a
-        scelerisque purus semper eget.
-        <div class="time">28.05.2024</div>
-      </div>
-    </div>
-    <div class="message" id="m_id225465472">
-      <img class="avatar" src="../assets/images/avatar2.jpg" alt="" />
-      <div class="username">Test User</div>
-      <div class="text">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-        labore et dolore magna aliqua. Sed arcu non odio euismod lacinia at quis risus sed. Odio eu
-        feugiat pretium nibh. Eu mi bibendum neque egestas congue quisque egestas diam in.
-        Pellentesque habitant morbi tristique senectus et netus et malesuada. Sagittis orci a
-        scelerisque purus semper eget. Enim facilisis gravida neque convallis a cras semper auctor.
-        Est sit amet facilisis magna etiam tempor orci. Fringilla ut morbi tincidunt augue interdum
-        velit euismod in. Blandit volutpat maecenas volutpat blandit aliquam etiam erat velit
-        scelerisque.
-        <div class="time">28.05.2024</div>
-      </div>
-    </div>
+
   </div>
   <div class="type-area">
     <div class="media">
@@ -114,7 +65,21 @@
 
 <script setup>
 import { useTextareaAutosize } from '@vueuse/core'
+import { useChatStore } from '@/stores/chat';
+import { useUserStore } from '@/stores/user';
+import { computed, onMounted } from 'vue';
+
+const chat = useChatStore();
+const user = useUserStore();
 
 const selectedChat = defineModel()
 const { textarea, input } = useTextareaAutosize()
+
+onMounted(() => {
+  chat.getChatMessages(selectedChat.value);
+});
+
+const messages = computed(() => {
+  return chat.messages
+});
 </script>

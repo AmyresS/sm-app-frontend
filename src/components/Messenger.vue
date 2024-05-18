@@ -107,13 +107,13 @@
         </div>
 
         <div class="chat-list">
-          <div class="chat chat-group" @click="selectedChat = 'p_id1'">
+          <div v-for="chat in chatList" :key="chat.id" :class="`chat ${chat.recipients.length > 2 ? 'chat-group' : ''}`" @click="selectedChat = chat.id">
             <div class="avatar">
               <img src="../assets/images/16.png" alt="" />
             </div>
             <div class="chat-preview">
-              <p>Some group name</p>
-              <p>My first test message</p>
+              <p>{{ chat.title }}</p>
+              <p v-if="chat.lastMessage">{{ chat.lastMessage.message }}</p>
             </div>
             <div class="chat-info">
               <p class="time">19:00</p>
@@ -121,200 +121,6 @@
             </div>
           </div>
 
-          <div class="chat chat-group">
-            <div class="avatar">
-              <img src="../assets/images/7.png" alt="" />
-            </div>
-            <div class="chat-preview">
-              <p>Group</p>
-              <p>Hello world!</p>
-            </div>
-            <div class="chat-info">
-              <p class="time">19:00</p>
-              <p class="message-count unread">87</p>
-            </div>
-          </div>
-
-          <div class="chat">
-            <div class="avatar">
-              <img src="../assets/images/4.png" alt="" />
-            </div>
-            <div class="chat-preview">
-              <p>Some chat name</p>
-              <p>Test message for current chat. Some more text for testing. And even more!!</p>
-            </div>
-            <div class="chat-info">
-              <p class="time">19:00</p>
-              <p class="message-count">12</p>
-            </div>
-          </div>
-
-          <div class="chat">
-            <div class="avatar">
-              <img src="../assets/images/7.png" alt="" />
-            </div>
-            <div class="chat-preview">
-              <p>Some chat name</p>
-              <p>Test message for current chat. Some more text for testing. And even more!!</p>
-            </div>
-            <div class="chat-info">
-              <p class="time">19:00</p>
-              <p class="message-count unread">12</p>
-            </div>
-          </div>
-
-          <div class="chat chat-group">
-            <div class="avatar">
-              <img src="../assets/images/16.png" alt="" />
-            </div>
-            <div class="chat-preview">
-              <p>Some group name</p>
-              <p>Test message for current chat. Some more text for testing. And even more!!</p>
-            </div>
-            <div class="chat-info">
-              <p class="time">Sat</p>
-              <p class="message-count">28</p>
-            </div>
-          </div>
-
-          <div class="chat">
-            <div class="avatar">
-              <img src="../assets/images/16.png" alt="" />
-            </div>
-            <div class="chat-preview">
-              <p>Some chat name</p>
-              <p>Test message for current chat. Some more text for testing. And even more!!</p>
-            </div>
-            <div class="chat-info">
-              <p class="time">Fri</p>
-              <p class="message-count">12</p>
-            </div>
-          </div>
-
-          <div class="chat chat-group">
-            <div class="avatar">
-              <img src="../assets/images/7.png" alt="" />
-            </div>
-            <div class="chat-preview">
-              <p>Some group name</p>
-              <p>Test message for current chat. Some more text for testing. And even more!!</p>
-            </div>
-            <div class="chat-info">
-              <p class="time">Thu</p>
-              <p class="message-count unread">999+</p>
-            </div>
-          </div>
-
-          <div class="chat">
-            <div class="avatar">
-              <img src="../assets/images/4.png" alt="" />
-            </div>
-            <div class="chat-preview">
-              <p>Some chat name</p>
-              <p>Test message for current chat. Some more text for testing. And even more!!</p>
-            </div>
-            <div class="chat-info">
-              <p class="time">Wed</p>
-              <p class="message-count unread">2</p>
-            </div>
-          </div>
-
-          <div class="chat">
-            <div class="avatar">
-              <img src="../assets/images/7.png" alt="" />
-            </div>
-            <div class="chat-preview">
-              <p>Some chat name</p>
-              <p>Test message for current chat. Some more text for testing. And even more!!</p>
-            </div>
-            <div class="chat-info">
-              <p class="time">Tue</p>
-              <p class="message-count unread">8</p>
-            </div>
-          </div>
-
-          <div class="chat chat-group">
-            <div class="avatar">
-              <img src="../assets/images/16.png" alt="" />
-            </div>
-            <div class="chat-preview">
-              <p>Some group name</p>
-              <p>Test message for current chat. Some more text for testing. And even more!!</p>
-            </div>
-            <div class="chat-info">
-              <p class="time">Mon</p>
-              <p class="message-count">28</p>
-            </div>
-          </div>
-          <div class="chat">
-            <div class="avatar">
-              <img src="../assets/images/16.png" alt="" />
-            </div>
-            <div class="chat-preview">
-              <p>Some chat name</p>
-              <p>Test message for current chat. Some more text for testing. And even more!!</p>
-            </div>
-            <div class="chat-info">
-              <p class="time">28.05.2024</p>
-              <p class="message-count unread">12</p>
-            </div>
-          </div>
-
-          <div class="chat chat-group">
-            <div class="avatar">
-              <img src="../assets/images/7.png" alt="" />
-            </div>
-            <div class="chat-preview">
-              <p>Some group name</p>
-              <p>Test message for current chat. Some more text for testing. And even more!!</p>
-            </div>
-            <div class="chat-info">
-              <p class="time">28.05.2024</p>
-              <p class="message-count unread">99+</p>
-            </div>
-          </div>
-
-          <div class="chat">
-            <div class="avatar">
-              <img src="../assets/images/4.png" alt="" />
-            </div>
-            <div class="chat-preview">
-              <p>Some chat name</p>
-              <p>Test message for current chat. Some more text for testing. And even more!!</p>
-            </div>
-            <div class="chat-info">
-              <p class="time">28.05.2024</p>
-              <p class="message-count">12</p>
-            </div>
-          </div>
-
-          <div class="chat">
-            <div class="avatar">
-              <img src="../assets/images/7.png" alt="" />
-            </div>
-            <div class="chat-preview">
-              <p>Some chat name</p>
-              <p>Test message for current chat. Some more text for testing. And even more!!</p>
-            </div>
-            <div class="chat-info">
-              <p class="time">28.05.2024</p>
-              <p class="message-count">12</p>
-            </div>
-          </div>
-
-          <div class="chat chat-group">
-            <div class="avatar">
-              <img src="../assets/images/16.png" alt="" />
-            </div>
-            <div class="chat-preview">
-              <p>Some group name</p>
-              <p>Test message for current chat. Some more text for testing. And even more!!</p>
-            </div>
-            <div class="chat-info">
-              <p class="time">28.05.2024</p>
-              <p class="message-count">28</p>
-            </div>
-          </div>
         </div>
       </div>
       <div class="box chat-info-box">
@@ -330,10 +136,20 @@
 </style>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import Chat from './Chat.vue'
 import ChatInfo from './ChatInfo.vue'
 import Modal from './Modal.vue'
+import { useChatStore } from '@/stores/chat'
+
+const chat = useChatStore();
+const chatList = computed(() => {
+  return chat.getChats
+});
+
+onMounted(() => {
+  chat.findMyChats().then(() => {});
+});
 
 const selectedChat = ref()
 const isModalOpened = ref(false)
