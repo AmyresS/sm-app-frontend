@@ -75,7 +75,9 @@ const selectedChat = defineModel()
 const { textarea, input } = useTextareaAutosize()
 
 onMounted(() => {
-  chat.getChatMessages(selectedChat.value);
+  chat.getChatMessages(selectedChat.value).then(() => {
+    chat.attachSocket();
+  });
 });
 
 const messages = computed(() => {

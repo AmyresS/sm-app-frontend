@@ -1,13 +1,15 @@
-import { API } from "@/api";
+import { API, BASE_URL } from "@/api";
 import { defineStore } from "pinia";
 import { useUserStore } from "./user";
 import { useAuthStore } from "./auth";
+import { io } from "socket.io-client";
 
 export const useChatStore = defineStore('chat', {
     state: () => ({
         chats: [],
         chat: null,
-        messages: []
+        messages: [],
+        socket: null
     }),
 
     getters: {
@@ -49,6 +51,11 @@ export const useChatStore = defineStore('chat', {
             const userStore = useUserStore();
             await userStore.resolveUsers(this.chat.recipients);
             this.chat.recipients = this.chat.recipients.map((userId) => userStore.getUser(userId));
+        },
+
+        async attachSocket() {
+            this.socket = io(BASE_URL);
+            this.socket.emit('test', 'hello world from websocket!!');
         },
 
         async postMessage(message) {
