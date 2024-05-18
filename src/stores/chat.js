@@ -53,7 +53,12 @@ export const useChatStore = defineStore('chat', {
 
         async postMessage(message) {
             const res = await API.post(`/chat/${this.chat.id}/message`, { message });
-            this.messages.push(res.data);
+            const newMessage = res.data;
+
+            const authStore = useAuthStore();
+            newMessage.user = authStore.getUser;
+            newMessage.isMyself = true;
+            this.messages.push(newMessage);
         }
     }
 });
