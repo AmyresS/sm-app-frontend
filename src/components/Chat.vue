@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div @click="selectedChat = null" id="closeChatButton">
     <svg
@@ -66,11 +67,9 @@
 <script setup>
 import { useTextareaAutosize } from '@vueuse/core'
 import { useChatStore } from '@/stores/chat';
-import { useUserStore } from '@/stores/user';
 import { computed, onMounted } from 'vue';
 
 const chat = useChatStore();
-const user = useUserStore();
 
 const selectedChat = defineModel()
 const { textarea, input } = useTextareaAutosize()
