@@ -6,11 +6,14 @@ import { useAuthStore } from "./auth";
 export const useChatStore = defineStore('chat', {
     state: () => ({
         chats: [],
+        chat: null,
         messages: []
     }),
 
     getters: {
         getChats: (state) => state.chats,
+        getChat: (state) => state.chat,
+        getRecipients: (state) => state.chat?.recipients,
         getMessages: (state) => state.messages
     },
 
@@ -28,8 +31,8 @@ export const useChatStore = defineStore('chat', {
             const userStore = useUserStore();
             const authStore = useAuthStore();
             const myself = authStore.getUser;
-            await Promise.all([...new Set(this.messages.map((message) => message.userId))]
-                .map((userId) => userStore.fetchUser(userId)));
+            
+            await userStore.resolveUsers(this.messages.map((message) => message.userId));
             for (const message of this.messages) {
                 const user = userStore.getUser(message.userId);
                 message.user = user;
@@ -37,6 +40,15 @@ export const useChatStore = defineStore('chat', {
                     message.isMyself = myself.id === user.id;
                 }
             }
+        },
+
+        async fetchChat(chatId) {
+            const res = await API.get(`/chat/${chatId}`);
+            this.chat = res.data;
+
+            const userStore = useUserStore();
+            await userStore.resolveUsers(this.chat.recipients);
+            this.chat.recipients = this.chat.recipients.map((userId) => userStore.getUser(userId));
         }
     }
 });

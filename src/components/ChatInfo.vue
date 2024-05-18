@@ -2,77 +2,17 @@
   <div class="chat-information">
     <div class="top-block">
       <img class="avatar" src="../assets/images/16.png" alt="" />
-      <div class="name">Some group name</div>
+      <div class="name">{{ chat.title }}</div>
       <div class="description">
-        This is a test group for testing the design of the messenger on different screen sizes, etc.
+        {{ chat.description }}
       </div>
     </div>
 
     <div class="members">
-      <div class="member">
+      <div v-for="recipient in recipients" class="member" :key="recipient.id">
         <img src="../assets/images/photo_2024-05-03_02-58-25.jpg" alt="" class="user-avatar" />
-        <div class="name">AmyresS</div>
-        <div class="role">Admin</div>
-        <div class="messageTo"></div>
-      </div>
-      <div class="member">
-        <img src="../assets/images/avatar2.jpg" alt="" class="user-avatar" />
-        <div class="name">Test User</div>
-        <div class="role">Member</div>
-        <div class="messageTo"></div>
-      </div>
-      <div class="member">
-        <img src="../assets/images/avatar3.jpg" alt="" class="user-avatar" />
-        <div class="name">Test User2</div>
-        <div class="role">Member</div>
-        <div class="messageTo"></div>
-      </div>
-      <div class="member">
-        <img src="../assets/images/avatar2.jpg" alt="" class="user-avatar" />
-        <div class="name">Test User3</div>
-        <div class="role">Member</div>
-        <div class="messageTo"></div>
-      </div>
-      <div class="member">
-        <img src="../assets/images/avatar3.jpg" alt="" class="user-avatar" />
-        <div class="name">Test User4</div>
-        <div class="role">Member</div>
-        <div class="messageTo"></div>
-      </div>
-      <div class="member">
-        <img src="../assets/images/avatar2.jpg" alt="" class="user-avatar" />
-        <div class="name">Test User3</div>
-        <div class="role">Member</div>
-        <div class="messageTo"></div>
-      </div>
-      <div class="member">
-        <img src="../assets/images/avatar3.jpg" alt="" class="user-avatar" />
-        <div class="name">Test User4</div>
-        <div class="role">Member</div>
-        <div class="messageTo"></div>
-      </div>
-      <div class="member">
-        <img src="../assets/images/avatar3.jpg" alt="" class="user-avatar" />
-        <div class="name">Test User5</div>
-        <div class="role">Member</div>
-        <div class="messageTo"></div>
-      </div>
-      <div class="member">
-        <img src="../assets/images/avatar2.jpg" alt="" class="user-avatar" />
-        <div class="name">Test User6</div>
-        <div class="role">Member</div>
-        <div class="messageTo"></div>
-      </div>
-      <div class="member">
-        <img src="../assets/images/avatar3.jpg" alt="" class="user-avatar" />
-        <div class="name">Test User7</div>
-        <div class="role">Member</div>
-        <div class="messageTo"></div>
-      </div>
-      <div class="member">
-        <img src="../assets/images/avatar2.jpg" alt="" class="user-avatar" />
-        <div class="name">Test User8</div>
-        <div class="role">Member</div>
+        <div class="name">{{ recipient.name }}</div>
+        <div class="role">User</div>
         <div class="messageTo"></div>
       </div>
     </div>
@@ -199,12 +139,26 @@
 </style>
 
 <script setup>
-import { ref } from 'vue'
+import { onMounted, ref, computed } from 'vue'
 import Modal from './Modal.vue'
+import { useChatStore } from '@/stores/chat';
 
 const selectedChat = defineModel()
 const isModalOpened = ref(0)
 const modal_states = ref({})
+
+const chatStore = useChatStore();
+const chat = computed(() => {
+  return chatStore.getChat;
+});
+
+const recipients = computed(() => {
+  return chatStore.getRecipients;
+});
+
+onMounted(() => {
+  chatStore.fetchChat(selectedChat.value);
+});
 
 const openModal = (index) => {
   isModalOpened.value = index
