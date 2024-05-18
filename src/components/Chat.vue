@@ -45,7 +45,7 @@
         v-model="input"
       ></textarea>
     </div>
-    <div class="send">
+    <div class="send" v-on:click="postMessage()">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         enable-background="new 0 0 32 32"
@@ -79,6 +79,12 @@ onMounted(() => {
 });
 
 const messages = computed(() => {
-  return chat.messages
+  return chat.getMessages
 });
+
+function postMessage() {
+  chat.postMessage(input.value).then(() => {
+    input.value = "";
+  });
+}
 </script>

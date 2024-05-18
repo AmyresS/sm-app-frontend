@@ -1,5 +1,5 @@
 <template>
-  <div class="chat-information">
+  <div v-if="chat" class="chat-information">
     <div class="top-block">
       <img class="avatar" src="../assets/images/16.png" alt="" />
       <div class="name">{{ chat.title }}</div>
@@ -145,6 +145,7 @@ import { useChatStore } from '@/stores/chat';
 
 const selectedChat = defineModel()
 const isModalOpened = ref(0)
+// eslint-disable-next-line no-unused-vars
 const modal_states = ref({})
 
 const chatStore = useChatStore();

@@ -49,6 +49,11 @@ export const useChatStore = defineStore('chat', {
             const userStore = useUserStore();
             await userStore.resolveUsers(this.chat.recipients);
             this.chat.recipients = this.chat.recipients.map((userId) => userStore.getUser(userId));
+        },
+
+        async postMessage(message) {
+            const res = await API.post(`/chat/${this.chat.id}/message`, { message });
+            this.messages.push(res.data);
         }
     }
 });
